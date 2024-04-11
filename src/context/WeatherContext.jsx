@@ -37,13 +37,15 @@ export const WeatherProvider = ({ children }) => {
     };
 
     fetchData();
-  }, [city]);
+  }, [city, units]);
 
   const value = {
     weather,
     city,
     setCity,
+    units,
     setUnits,
+    hourlyData,
   };
 
   return (

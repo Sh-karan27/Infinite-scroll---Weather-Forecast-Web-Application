@@ -32,10 +32,9 @@ li:hover {
 }
 
 input {
-  border: 2px solid #9a9a9a;
+  border: 2px solid #202a3a;
   background: transparent;
   color: #0096c7;
-}
-input:focus {
-  border: 2px solid #0096c7;
+  border-radius: 4px;
+  border: 1px solid #0096c7;
 }
