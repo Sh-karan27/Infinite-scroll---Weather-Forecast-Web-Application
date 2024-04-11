@@ -37,9 +37,8 @@ const Weather = () => {
   const temperature = weather.length > 0 ? weather[0].main.temp : null;
   const temperatureIcon = getWeatherIcon(temperature, units);
   return (
-    <section className='text-white text-xl w-full  h-full flex flex-col  items-center justify-center gap-5 min-h-[75vh]'>
+    <section className='text-white text-xl w-full  h-full flex flex-col  items-center justify-between min-h-[75vh]'>
       <div className='flex items-center justify-center px-5 py-5'>
-        {' '}
         <input
           placeholder='Enter city name'
           type='text'
@@ -128,7 +127,7 @@ const Weather = () => {
         ))}
         <div className=' flex flex-col items-center justify-center gap-2  bg-[#202A3A]  py-5 px-5 rounded-xl '>
           <h1 className='flex items-center justify-center gap-1 text-blue-500 font-bold'>
-            Hourly Forcast <FaRegHourglass />
+            Hourly Forcast <FaRegHourglass className='text-white' />
           </h1>
           <div className='flex items-center justify-start  gap-10 w-[17rem]  '>
             <h1 className='text-sm'>Date/Time</h1>
