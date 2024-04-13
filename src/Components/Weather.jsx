@@ -51,13 +51,13 @@ const Weather = () => {
         {weather.map((data, i) => (
           <div
             key={i}
-            className='  flex flex-col items-center justify-center gap-5  bg-[#202A3A]  py-5 px-5 rounded-xl'>
+            className='  flex flex-col items-center justify-center  bg-[#202A3A]  py-5 px-5 rounded-xl'>
             <img
-              src={temperatureIcon} // Use the temperature icon determined outside of the loop
+              src={temperatureIcon}
               alt='Temperature Icon'
               className='w-[150px]'
             />
-            <div className='flex flex-col items-center justify-center gap-5 w-full text-center '>
+            <div className='flex flex-col items-center justify-center gap-0 w-full text-center '>
               <div className='flex   items-start justify-center gap-5 w-full'>
                 <div className='flex flex-col items-center justify-center'>
                   <h1 className='text-5xl font-bold flex text-white'>
