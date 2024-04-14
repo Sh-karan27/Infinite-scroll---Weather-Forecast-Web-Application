@@ -10,10 +10,16 @@ import { FaRegHourglass } from 'react-icons/fa6';
 import HightTemp from '../assets/HighTemp.png';
 import LowTemp from '../assets/LowTemp.png';
 import MediummTemp from '../assets/MediumTemp.png';
+import { WiHumidity } from 'react-icons/wi';
+import { TiPin } from 'react-icons/ti';
+import { NavLink } from 'react-router-dom';
+import { usePinnedCity } from '../context/PinnedCityContext';
+import { IoIosSearch } from 'react-icons/io';
 
 const Weather = () => {
+  const [searchValue, setSearchValue] = useState('');
   const { weather, setCity, units, setUnits, hourlyData } = useWeather();
-
+  const { pinCity, unpinCity } = usePinnedCity();
   if (!weather) {
     return <div>Loading...</div>;
   }
@@ -36,15 +42,22 @@ const Weather = () => {
   };
   const temperature = weather.length > 0 ? weather[0].main.temp : null;
   const temperatureIcon = getWeatherIcon(temperature, units);
+  const handleSearch = (e) => {
+    setCity(searchValue);
+  };
   return (
     <section className='text-white text-xl w-full  h-full flex flex-col  items-center justify-between min-h-[75vh]'>
-      <div className='flex items-center justify-center px-5 py-5'>
+      <div className='flex items-center justify-center px-5 py-5 gap-2'>
         <input
           placeholder='Enter city name'
           type='text'
           className='w-[400px]  px-1 py-1 '
-          onChange={(e) => setCity(e.target.value)}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
+        <button onClick={handleSearch} className='hover:text-blue-500 text-2xl'>
+          <IoIosSearch />
+        </button>
       </div>
 
       <div className='flex items-start justify-center gap-10 w-full h-full max-sm:flex-col max-sm:items-center'>
@@ -59,9 +72,13 @@ const Weather = () => {
             />
             <div className='flex flex-col items-center justify-center gap-0 w-full text-center '>
               <div className='flex   items-start justify-center gap-5 w-full'>
-                <div className='flex flex-col items-center justify-center'>
+                <div className='flex flex-col items-center justify-center gap-5'>
                   <h1 className='text-5xl font-bold flex text-white'>
                     {data.name}
+                    <span className='text-sm text-blue-500'>
+                      {' '}
+                      {data.sys.country}
+                    </span>
                   </h1>
                   <div className='flex  items-center justify-center gap-2'>
                     <span className='text-blue-500'>{data.main.temp}</span>
@@ -81,6 +98,17 @@ const Weather = () => {
                         } cursor-pointer`}
                       />
                     </div>
+                    <NavLink
+                      to='/pin'
+                      className='hover:text-blue-500 cursor-pointer'>
+                      <TiPin
+                        className='text-3xl'
+                        onClick={() => {
+                          pinCity(weather);
+                          console.log(weather);
+                        }}
+                      />
+                    </NavLink>
                   </div>
                 </div>
               </div>
@@ -102,10 +130,15 @@ const Weather = () => {
               </div>
             </div>
 
-            <div className='w-full flex flex-col items-start justify-center gap-5'>
+            <div className='w-full flex flex-col items-start justify-center gap-3'>
               <div className='flex items-center justify-center gap-2 text-gray-500 text-lg'>
                 <CiTempHigh className='text-blue-500' /> Real feel:{''}
                 {data.main.feels_like}
+              </div>
+              <div className='flex items-center justify-center gap-2 text-gray-500 text-lg'>
+                <WiHumidity className='text-blue-500' />
+                Humidity:{''}
+                {data.main.humidity}%
               </div>
               <div className='flex items-center justify-center gap-2 text-gray-500  text-lg'>
                 <FaWind className='text-blue-500' /> Wind:{''}

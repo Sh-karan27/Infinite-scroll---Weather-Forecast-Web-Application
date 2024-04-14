@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useCityData } from '../context/CityData';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { NavLink } from 'react-router-dom';
+import { useWeather } from '../context/WeatherContext';
 
 const InfiniteCitiesTable = () => {
   const { cities, hasMore, setPage } = useCityData();
+  const { setCity } = useWeather();
+
   const loader = useRef(null);
 
   useEffect(() => {
@@ -33,7 +37,7 @@ const InfiniteCitiesTable = () => {
   return (
     <>
       <section className='w-full h-full flex flex-col items-center justify-center'>
-        <div className='w-full flex justify-center px-10 max-sm:justify-start '>
+        <div className='w-full flex justify-center px-10 max-sm:justify-start max-sm:overflow-scroll '>
           <table className=' table-auto text-left  mt-20 w-full'>
             <thead>
               <tr>
@@ -63,9 +67,13 @@ const InfiniteCitiesTable = () => {
             <tbody>
               {cities.map((city, i) => (
                 <tr key={i}>
-                  <td className='p-4 border-b border-blue-gray-50 text-white'>
-                    {city.name}
+                  <td className='p-4 border-b border-blue-gray-50 text-blue-500 underline'>
+                    <NavLink to='/' onClick={() => setCity(city.name)}>
+                      {' '}
+                      {city.name}
+                    </NavLink>
                   </td>
+
                   <td className='p-4 border-b border-blue-gray-50 text-gray-500'>
                     {city.cou_name_en}
                   </td>
@@ -83,7 +91,10 @@ const InfiniteCitiesTable = () => {
           </table>
         </div>
 
-        <div ref={loader} style={{ height: '100px', margin: '10px' }}>
+        <div
+          ref={loader}
+          style={{ height: '100px', margin: '10px' }}
+          className='text-blue-500'>
           Loading more...
         </div>
       </section>
