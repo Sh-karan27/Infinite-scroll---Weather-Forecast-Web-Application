@@ -6,7 +6,8 @@ This Weather App allows users to search for weather forecasts of any city worldw
 2. Hourly Forecast: Provides detailed hourly weather forecasts for the selected city.
 3. Pin Cities: Allows users to pin their favorite cities for quick access to weather information.
 4. City Data Table: Displays a table of cities with populations over 1000, supporting infinite scroll for efficient browsing.
-5. Technologies Used:
+5. Responsive Design: The app is optimized to provide a consistent and user-friendly experience across all devices, including desktops, tablets, and mobile phones.
+6. Technologies Used:
  React.js
  React Hooks
  React Router
