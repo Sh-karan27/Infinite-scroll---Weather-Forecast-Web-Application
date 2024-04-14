@@ -20,4 +20,4 @@ This Weather App allows users to search for weather forecasts of any city worldw
 3. Pin Cities: Click the pin icon to save the city to the pinned cities list for easy access.
 4. City Data Table: Scroll through the data table to explore cities with populations exceeding 1000.
 
-[Preview]:(https://infinite-scroll-weather-forecast-web-application.vercel.app/)
+[Preview]:(https://infinite-scroll-weather-forecast-web-application.vercel.app/).
