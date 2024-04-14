@@ -1,13 +1,13 @@
 import React from 'react';
 import { usePinnedCity } from '../context/PinnedCityContext';
-import { RiCelsiusFill } from 'react-icons/ri';
-import { TbTemperatureFahrenheit } from 'react-icons/tb';
+
 import { useWeather } from '../context/WeatherContext';
 import { CiTempHigh } from 'react-icons/ci';
 import { WiHumidity } from 'react-icons/wi';
 import { FaWind } from 'react-icons/fa';
 import { BsCloudMoonFill } from 'react-icons/bs';
 import { BsFillSunriseFill } from 'react-icons/bs';
+import { RiUnpinFill } from 'react-icons/ri';
 
 const PinnedCity = () => {
   const formatTime = (timestamp) => {
@@ -17,31 +17,49 @@ const PinnedCity = () => {
       minute: '2-digit',
     });
   };
-  const { pinned, setPinned } = usePinnedCity();
-  const { units } = useWeather();
-  console.log(pinned);
+  const { pinned, unpinCity, removeAllPinnedCities } = usePinnedCity();
+
+  if (!pinned) {
+    <div>Loading.....</div>;
+  }
+
   return (
     <section className='w-full h-full flex  items-center justify-center '>
-      <div className='w-3/4 flex flex-col items-center justify-center gap-10 mt-20'>
-        <h1 className='text-5xl font-bold text-white'>Pinned Cities</h1>
-        <div className='grid grid-cols-3 gap-20'>
+      <div className='w-full flex flex-col items-center justify-center gap-10 mt-20'>
+        {' '}
+        {pinned.length === 0 ? (
+          <h1 className='text-5xl font-bold text-white '>No pinned cities</h1>
+        ) : (
+          <>
+            <h1 className='text-5xl font-bold text-white'>Pinned Cities</h1>
+            <button
+              onClick={removeAllPinnedCities}
+              className='bg-red-500 text-white px-4 py-2 rounded-md mt-2'>
+              Clear all
+            </button>
+          </>
+        )}
+        <div className='grid  grid-cols-3 gap-20  px-2 py-2 max-sm:flex max-sm:flex-col'>
           {pinned.map((city, index) => (
             <div
               key={index}
-              className=' bg-[#202A3A] flex flex-col items-center justify-center gap-2 w-full px-2 py-2 rounded-xl'>
-              <h1 className='text-3xl font-bold flex text-white'>
-                {city.name}
-                <span className='text-sm text-blue-500'>
-                  {' '}
-                  {city.sys.country}
-                </span>
-              </h1>
+              className=' bg-[#202A3A] flex flex-col items-center justify-center gap-2   px-2 py-2 rounded-xl'>
+              <div className='flex items-center justify-center gap-2'>
+                <h1 className='text-3xl font-bold flex text-white items-center justify-center'>
+                  {city.name}
+                  <span className='text-sm text-blue-500'>
+                    {' '}
+                    {city.sys.country}
+                  </span>
+                </h1>
+                <RiUnpinFill
+                  className='text-red-500 text-3xl hover:text-blue-500 cursor-pointer'
+                  onClick={() => unpinCity(city.id)}
+                />
+              </div>
+
               <div className='flex  items-center justify-center gap-2'>
                 <span className='text-blue-500'>{city.main.temp}</span>
-                <div className='flex items-center justify-center'>
-                  {' '}
-                  <RiCelsiusFill className='text-white' />
-                </div>
               </div>
               <div className='flex  items-center justify-center'>
                 <div className='flex flex-col items-center justify-center'>
@@ -59,7 +77,7 @@ const PinnedCity = () => {
                   alt='Weather Icon'
                 />
               </div>
-              <div className='w-full flex flex-col items-start justify-center gap-3'>
+              <div className='w-full flex flex-col items-center justify-center gap-3'>
                 <div className='flex items-center justify-center gap-2 text-gray-500 text-lg'>
                   <CiTempHigh className='text-blue-500' /> Real feel:{''}
                   {city.main.feels_like}
@@ -72,7 +90,6 @@ const PinnedCity = () => {
                 <div className='flex items-center justify-center gap-2 text-gray-500  text-lg'>
                   <FaWind className='text-blue-500' /> Wind:{''}
                   {city.wind.speed}
-                  {units === 'metric' ? <span>(m/s)</span> : <span>(mph)</span>}
                 </div>
 
                 <div className='flex items-center justify-center gap-2 text-gray-500  text-lg'>

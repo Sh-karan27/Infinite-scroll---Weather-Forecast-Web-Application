@@ -24,14 +24,13 @@ export const WeatherProvider = ({ children }) => {
         );
         const { data } = response;
         setWeather([data]);
-        console.log(data);
+
         setCoord(data.coord);
 
         const hourlyuResponse = await axios.get(
           `http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=10&appid=5452bf2b50ee0598ccc8c2d4278f5349&units=${units}`
         );
         setHourlyData(hourlyuResponse.data.list);
-        console.log(hourlyuResponse.data.list);
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }

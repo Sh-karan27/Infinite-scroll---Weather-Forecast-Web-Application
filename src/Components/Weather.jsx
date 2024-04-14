@@ -18,8 +18,9 @@ import { IoIosSearch } from 'react-icons/io';
 
 const Weather = () => {
   const [searchValue, setSearchValue] = useState('');
+  const { pinCity } = usePinnedCity();
   const { weather, setCity, units, setUnits, hourlyData } = useWeather();
-  const { pinCity, unpinCity } = usePinnedCity();
+
   if (!weather) {
     return <div>Loading...</div>;
   }
@@ -46,12 +47,12 @@ const Weather = () => {
     setCity(searchValue);
   };
   return (
-    <section className='text-white text-xl w-full  h-full flex flex-col  items-center justify-between min-h-[75vh]'>
+    <section className='text-white text-xl w-full  h-full flex flex-col  items-center justify-center gap-10 min-h-[75vh]'>
       <div className='flex items-center justify-center px-5 py-5 gap-2'>
         <input
           placeholder='Enter city name'
           type='text'
-          className='w-[400px]  px-1 py-1 '
+          className='  px-1 py-1 '
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
@@ -64,7 +65,8 @@ const Weather = () => {
         {weather.map((data, i) => (
           <div
             key={i}
-            className='  flex flex-col items-center justify-center  bg-[#202A3A]  py-5 px-5 rounded-xl'>
+            id='box'
+            className='   flex flex-col items-center justify-center  bg-[#202A3A]  py-5 px-5 rounded-xl'>
             <img
               src={temperatureIcon}
               alt='Temperature Icon'
@@ -105,7 +107,6 @@ const Weather = () => {
                         className='text-3xl'
                         onClick={() => {
                           pinCity(weather);
-                          console.log(weather);
                         }}
                       />
                     </NavLink>

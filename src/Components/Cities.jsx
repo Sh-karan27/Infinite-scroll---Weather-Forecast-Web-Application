@@ -37,6 +37,9 @@ const InfiniteCitiesTable = () => {
   return (
     <>
       <section className='w-full h-full flex flex-col items-center justify-center'>
+        <h1 className='text-3xl text-white mt-20 font-bold'>
+          Cities with population more than 1000
+        </h1>
         <div className='w-full flex justify-center px-10 max-sm:justify-start max-sm:overflow-scroll '>
           <table className=' table-auto text-left  mt-20 w-full'>
             <thead>

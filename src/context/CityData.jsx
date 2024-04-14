@@ -21,11 +21,9 @@ export const CitiesProvider = ({ children }) => {
           }
         );
         setCities((prevCities) => [...prevCities, ...response.data.results]);
-        console.log(response.data.results);
+
         setHasMore(response.data.results.length > 0);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
     fetchData();
   }, [page]);
