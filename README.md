@@ -21,3 +21,4 @@ This Weather App allows users to search for weather forecasts of any city worldw
 4. City Data Table: Scroll through the data table to explore cities with populations exceeding 1000.
 
 [Preview](https://infinite-scroll-weather-forecast-web-application.vercel.app/).
+[Project Link](https://github.com/Sh-karan27/Infinite-scroll---Weather-Forecast-Web-Application).
